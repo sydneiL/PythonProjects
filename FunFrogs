@@ -1,0 +1,202 @@
+#Fun Frogs
+#Game where you estimate the least to most toxic frog species in the world
+#Made for CSC235@UAT
+
+
+import pygame
+import random
+
+
+# Initialize Fun Frogs
+
+
+pygame.init()
+
+# Constants
+WIDTH, HEIGHT = 800, 600
+BACKGROUND_COLOR = (255, 255, 255)
+
+# Frog species data with their names and toxicity levels
+FROG_DATA = [
+    {"name": "Green Poison Frog", "toxicity": "Least Toxic"},
+    {"name": "Golden Poison Frog", "toxicity": "Moderate Toxic"},
+    {"name": "Blue Poison Dart Frog", "toxicity": "Highly Toxic"},
+    {"name": "Strawberry Poison Dart Frog", "toxicity": "Moderate Toxic"},
+    {"name": "Phantasmal Poison Frog", "toxicity": "Highly Toxic"},
+    # Add more frog species with their toxicity levels
+]
+
+# Initialize Pygame window
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Fun Frogs")
+
+# Fonts
+font = pygame.font.Font(None, 36)
+
+# Game Stats
+current_frog = None
+score = 0
+level = 1
+
+# Scores required for scholarships and internships
+SCHOLARSHIP_SCORE = 10
+INTERNSHIP_SCORE = 20
+
+# Function to get a random frog from the data
+def get_random_frog():
+    return random.choice(FROG_DATA)
+
+# Function to display the current frog and prompt the player
+def display_frog(frog):
+    screen.fill(BACKGROUND_COLOR)
+    text = font.render(f"Level {level}: Name the toxic level of {frog['name']}:", True, (0, 0, 0))
+    screen.blit(text, (20, 20))
+    pygame.display.flip()
+
+# Main game loop
+def game_loop():
+    global current_frog, score, level
+    current_frog = get_random_frog()
+    display_frog(current_frog)
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    if current_frog["toxicity"] == "Least Toxic":
+                        score += 1
+                if event.key == pygame.K_2:
+                    if current_frog["toxicity"] == "Moderate Toxic":
+                        score += 1
+                if event.key == pygame.K_3:
+                    if current_frog["toxicity"] == "Highly Toxic":
+                        score += 1
+                current_frog = get_random_frog()
+                display_frog(current_frog)
+                if score >= SCHOLARSHIP_SCORE:
+                    level += 1
+                if score >= INTERNSHIP_SCORE:
+                    running = False
+                    display_result("Congratulations! You've earned an Internship in Batrachology.")
+                    break
+
+        # Update the screen with the score and level
+        screen.fill(BACKGROUND_COLOR)
+        text = font.render(f"Level {level} - Score: {score}", True, (0, 0, 0))
+        screen.blit(text, (20, 20))
+        pygame.display.flip()
+
+        if level > 10:
+            running = False
+            display_result("Congratulations! You've completed the game.")
+            break
+
+    pygame.quit()
+
+# Function to display the result on the screen
+def display_result(result_text):
+    result_font = pygame.font.Font(None, 48)
+    result_text = result_font.render(result_text, True, (0, 0, 0))
+    screen.blit(result_text, (WIDTH // 2 - 200, HEIGHT // 2))
+    pygame.display.flip()
+    pygame.time.wait(3000)  # Display the result for 3 seconds before quitting
+
+if __name__ == "__main__":
+    game_loop()
+
+#EndofFunFrogs
+#GameOver
+# Initialize Fun Frogs
+
+
+pygame.init()
+
+# Constants
+WIDTH, HEIGHT = 800, 600
+BACKGROUND_COLOR = (255, 255, 255)
+
+# Frog species data with their names and toxicity levels
+FROG_DATA = [
+    {"name": "Green Poison Frog", "toxicity": "Least Toxic"},
+    {"name": "Golden Poison Frog", "toxicity": "Moderate Toxic"},
+    {"name": "Blue Poison Dart Frog", "toxicity": "Highly Toxic"},
+    {"name": "Strawberry Poison Dart Frog", "toxicity": "Moderate Toxic"},
+    {"name": "Phantasmal Poison Frog", "toxicity": "Highly Toxic"},
+    # Add more frog species with their toxicity levels
+]
+
+# Initialize Pygame window
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Toxic Frog Naming Game")
+
+# Fonts
+font = pygame.font.Font(None, 36)
+
+# Game Stats
+current_frog = None
+score = 0
+level = 1
+
+# Scores required for scholarships and internships
+SCHOLARSHIP_SCORE = 10
+INTERNSHIP_SCORE = 20
+
+
+# Main game loop
+def game_loop():
+    global current_frog, score, level
+    current_frog = get_random_frog()
+    display_frog(current_frog)
+
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    if current_frog["toxicity"] == "Least Toxic":
+                        score += 1
+                if event.key == pygame.K_2:
+                    if current_frog["toxicity"] == "Moderate Toxic":
+                        score += 1
+                if event.key == pygame.K_3:
+                    if current_frog["toxicity"] == "Highly Toxic":
+                        score += 1
+                current_frog = get_random_frog()
+                display_frog(current_frog)
+                if score >= SCHOLARSHIP_SCORE:
+                    level += 1
+                if score >= INTERNSHIP_SCORE:
+                    running = False
+                    display_result("Congratulations! You've earned an Internship in Batrachology.")
+                    break
+
+        # Update the screen with the score and level
+        screen.fill(BACKGROUND_COLOR)
+        text = font.render(f"Level {level} - Score: {score}", True, (0, 0, 0))
+        screen.blit(text, (20, 20))
+        pygame.display.flip()
+
+        if level > 10:
+            running = False
+            display_result("Congratulations! You've completed the game.")
+            break
+pygame.quit()
+
+# Function to display the result on the screen
+def display_result(result_text):
+    result_font = pygame.font.Font(None, 48)
+    result_text = result_font.render(result_text, True, (0, 0, 0))
+    screen.blit(result_text, (WIDTH // 2 - 200, HEIGHT // 2))
+    pygame.display.flip()
+    pygame.time.wait(3000)  # Display the result for 3 seconds before quitting
+
+if __name__ == "__main__":
+    game_loop()
+
+#EndofFunFrogs
+#GameOver
